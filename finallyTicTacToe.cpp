@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ctime>
 
+
 void drawBoard(char *spaces);
 void playerMove(char *spaces, char player);
 void compMove(char *spaces, char comp);
@@ -13,15 +14,26 @@ bool checkTie(char *spaces);
 
 int main() {
     char spaces[9] = {' ', ' ', ' ', ' ', ' ', ' ',' ', ' ', ' '};
-    char player = 'X';
-    char comp = 'O';
+    char player;
+    char comp;
     bool running = true;
-    bool winner;
 
     drawBoard(spaces);
     std::string name;
     std::cout << "Enter your name: ";
     std::cin >> name;
+
+    do {
+        std::cout << "Enter your side (X/O): ";
+        std::cin >> player;
+    }while (player != 'X' and player != 'O');
+
+    if (player == 'X') {
+        comp = 'O';
+    }
+    else {
+        comp = 'X';
+    }
 
     while (running) {
         playerMove(spaces, player);
@@ -45,8 +57,9 @@ int main() {
             running = false;
             break;
         }
-        std::cout << "Thanks for playing!\n";
+
     }
+    std::cout << "Thanks for playing!\n";
 
     return 0;
 }
